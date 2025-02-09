@@ -1,13 +1,17 @@
 package com.fizalise.inventoryservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-import java.util.Objects;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "inventory", schema = "public", catalog = "inventory_service")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class InventoryItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
