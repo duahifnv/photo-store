@@ -1,0 +1,16 @@
+services:
+  inventory-service-db:
+    container_name: inventory-service-db
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - ./docker/inventory-service:/docker-entrypoint-initdb.d
+      - inventory-service-db-data:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+    restart: unless-stopped
+volumes:
+  inventory-service-db-data:
