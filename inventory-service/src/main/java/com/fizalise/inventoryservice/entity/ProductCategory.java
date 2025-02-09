@@ -3,8 +3,6 @@ package com.fizalise.inventoryservice.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "product_categories", schema = "public", catalog = "inventory_service")
 @Data
