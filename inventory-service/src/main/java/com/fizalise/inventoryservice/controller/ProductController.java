@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/inventory/product-list")
 public record ProductController(ProductService productService) {
     @GetMapping
     public List<ProductItem> getAllItems(
