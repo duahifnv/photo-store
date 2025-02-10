@@ -1,19 +1,26 @@
 package com.fizalise.inventoryservice.service;
 
+import com.fizalise.inventoryservice.dto.ProductRequest;
 import com.fizalise.inventoryservice.entity.ProductCategory;
 import com.fizalise.inventoryservice.entity.ProductItem;
+import com.fizalise.inventoryservice.exception.BadRequestException;
+import com.fizalise.inventoryservice.exception.ResourceNotFoundException;
+import com.fizalise.inventoryservice.mapper.ProductMapper;
 import com.fizalise.inventoryservice.repository.ProductCategoryRepository;
 import com.fizalise.inventoryservice.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public record ProductService(ProductRepository productRepository,
-                             ProductCategoryRepository categoryRepository) {
+@RequiredArgsConstructor
+public class ProductService {
+    private final ProductRepository productRepository;
+    private final ProductCategoryRepository categoryRepository;
+    private final ProductMapper productMapper;
     public List<ProductItem> findAllItems() {
         return productRepository.findAll(
                 Sort.by(Sort.Direction.ASC, "price")
@@ -21,8 +28,7 @@ public record ProductService(ProductRepository productRepository,
     }
     public List<ProductItem> findAllItemsByCategoryCode(String categoryCode) {
         if (categoryRepository.findById(categoryCode).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Ресурс не найден");
+            throw new ResourceNotFoundException();
         }
         return productRepository.findAllByCategoryCode(
                 categoryCode,
@@ -31,5 +37,19 @@ public record ProductService(ProductRepository productRepository,
     }
     public List<ProductCategory> findAllCategories() {
         return categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+    }
+    @Transactional
+    public void createNewProduct(ProductRequest productRequest) {
+        if (productRepository.existsBySkuCode(productRequest.skuCode())) {
+            throw new BadRequestException("Уже существует продукт с SKU-code: " +
+                    productRequest.skuCode());
+        }
+        if (!categoryRepository.existsByCategoryCode(productRequest.categoryCode())) {
+            throw new BadRequestException("Не найдена продуктовая категория: " +
+                    productRequest.categoryCode());
+        }
+        productRepository.save(
+                productMapper.toProductItem(productRequest)
+        );
     }
 }
