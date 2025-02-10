@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class InventoryItem {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "sku_code")
     private String skuCode;
