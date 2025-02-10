@@ -26,4 +26,9 @@ public record InventoryController(InventoryService inventoryService) {
     public void updateInventory(@RequestBody InventoryUpdate inventoryUpdate) {
         inventoryService.updateInventory(inventoryUpdate);
     }
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteItemBySkuCode(@RequestParam String skuCode) {
+        inventoryService.deleteItemBySkuCode(skuCode);
+    }
 }
