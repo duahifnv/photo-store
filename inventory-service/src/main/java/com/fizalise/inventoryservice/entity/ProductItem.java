@@ -10,7 +10,6 @@ import java.sql.Date;
 @Table(name = "products", schema = "public", catalog = "inventory_service")
 @Data
 public class ProductItem {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "sku_code")
     private String skuCode;
