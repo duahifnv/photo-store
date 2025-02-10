@@ -18,9 +18,7 @@ public class RestClientConfig {
         RestClient restClient = RestClient.builder()
                 .baseUrl(inventoryServiceUrl)
                 .build();
-        return HttpServiceProxyFactory.builderFor(
-                RestClientAdapter.create(restClient)
-        )
+        return HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient))
                 .build()
                 .createClient(InventoryClient.class);
     }

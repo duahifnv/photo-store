@@ -3,17 +3,13 @@ package com.fizalise.orderservice.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fizalise.orderservice.dto.ClientErrorResponse;
-import com.fizalise.orderservice.exception.BadRequestException;
 import com.fizalise.orderservice.exception.ServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.io.IOException;
 
 @RestControllerAdvice
 @Slf4j

@@ -6,7 +6,6 @@ import com.fizalise.orderservice.dto.InventoryUpdate;
 import com.fizalise.orderservice.dto.OrderRequest;
 import com.fizalise.orderservice.entity.Order;
 import com.fizalise.orderservice.exception.ResourceNotFoundException;
-import com.fizalise.orderservice.exception.ServerException;
 import com.fizalise.orderservice.mapper.OrderMapper;
 import com.fizalise.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.channels.ClosedChannelException;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
