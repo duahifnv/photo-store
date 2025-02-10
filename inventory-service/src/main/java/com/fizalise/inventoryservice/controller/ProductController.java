@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventory/product-list")
+@RequestMapping("/inventory/products")
 public record ProductController(ProductService productService) {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -21,6 +21,11 @@ public record ProductController(ProductService productService) {
         }
         return productService.findAllItems();
     }
+    @GetMapping("/{skuCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductItem getItemBySkuCode(@PathVariable String skuCode) {
+        return productService.findItemBySkuCode(skuCode);
+    }
     @GetMapping("/categories")
     @ResponseStatus(HttpStatus.OK)
     public List<ProductCategory> getAllCategories() {
@@ -30,5 +35,10 @@ public record ProductController(ProductService productService) {
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewProduct(@RequestBody ProductRequest productRequest) {
         productService.createNewProduct(productRequest);
+    }
+    @DeleteMapping("/{skuCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProductBySkuCode(@PathVariable String skuCode) {
+        productService.deleteProductBySkuCode(skuCode);
     }
 }
