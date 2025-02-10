@@ -6,12 +6,14 @@ import com.fizalise.orderservice.entity.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", imports = UUID.class)
+@Mapper(componentModel = "spring", imports = { UUID.class, Timestamp.class, Instant.class } )
 public interface OrderMapper {
     @Mapping(target = "orderId", expression = "java(UUID.randomUUID())")
+    @Mapping(target = "orderTimestamp", expression = "java(Timestamp.from(Instant.now()))")
     Order toOrder(OrderRequest orderRequest, String customerEmail);
-    @Mapping(source = "orderTimestamp", target = "timestamp")
     CreatedOrder toCreatedOrder(Order order);
 }
