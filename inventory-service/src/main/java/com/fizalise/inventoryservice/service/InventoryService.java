@@ -7,6 +7,7 @@ import com.fizalise.inventoryservice.exception.ResourceNotFoundException;
 import com.fizalise.inventoryservice.repository.InventoryRepository;
 import com.fizalise.inventoryservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class InventoryService {
     private final InventoryRepository inventoryRepository;
     private final ProductRepository productRepository;
@@ -35,6 +37,7 @@ public class InventoryService {
     public void updateInventory(InventoryUpdate inventoryUpdate) {
         Optional<InventoryItem> optionalInventoryItem = inventoryRepository
                 .findById(inventoryUpdate.skuCode());
+        InventoryItem inventoryItem;
         if (optionalInventoryItem.isEmpty())  {
             if (!productRepository.existsById(inventoryUpdate.skuCode())) {
                 throw new ResourceNotFoundException();
@@ -44,29 +47,30 @@ public class InventoryService {
                         "Невозможно выполнить расход: товара еще нет в наличии"
                 );
             }
-            InventoryItem inventoryItem = InventoryItem.builder()
+            inventoryItem = InventoryItem.builder()
                     .skuCode(inventoryUpdate.skuCode())
                     .quantity(inventoryUpdate.quantity())
                     .build();
-            inventoryRepository.save(inventoryItem);
+            log.info("Добавлен новый товар: {}", inventoryItem);
         }
         else {
-            InventoryItem inventoryItem = optionalInventoryItem.get();
+            inventoryItem = optionalInventoryItem.get();
             if (inventoryUpdate.updateType() == InventoryUpdate.UpdateType.EXPENSE) {
                 if (inventoryUpdate.quantity() > inventoryItem.getQuantity()) {
                     throw new BadRequestException(
                             "Невозможно выполнить расход: в наличии товаров меньше, чем в расходе"
                     );
                 }
-                inventoryItem.setQuantity(inventoryItem.getQuantity() -
-                        inventoryUpdate.quantity());
+                inventoryItem.setQuantity(inventoryItem.getQuantity() - inventoryUpdate.quantity());
             }
             else {
-                inventoryItem.setQuantity(inventoryItem.getQuantity() +
-                        inventoryUpdate.quantity());
+                inventoryItem.setQuantity(inventoryItem.getQuantity() + inventoryUpdate.quantity());
             }
-            inventoryRepository.save(inventoryItem);
+            log.info("Изменено количество товара {}: {}",
+                    inventoryItem.getSkuCode(), inventoryItem.getQuantity());
         }
+        inventoryRepository.save(inventoryItem);
+        log.info("Товар {} сохранен в базу данных", inventoryItem.getSkuCode());
     }
     @Transactional
     public void deleteItemBySkuCode(String skuCode) {
@@ -74,5 +78,6 @@ public class InventoryService {
             throw new ResourceNotFoundException();
         }
         inventoryRepository.deleteBySkuCode(skuCode);
+        log.info("Товар {} удален из базы данных", skuCode);
     }
 }

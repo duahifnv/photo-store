@@ -9,6 +9,7 @@ import com.fizalise.inventoryservice.mapper.ProductMapper;
 import com.fizalise.inventoryservice.repository.ProductCategoryRepository;
 import com.fizalise.inventoryservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductCategoryRepository categoryRepository;
@@ -52,9 +54,10 @@ public class ProductService {
             throw new BadRequestException("Не найдена продуктовая категория: " +
                     productRequest.categoryCode());
         }
-        productRepository.save(
-                productMapper.toProductItem(productRequest)
-        );
+        ProductItem productItem = productMapper.toProductItem(productRequest);
+        log.info("Создан новый продукт: {}", productRequest.skuCode());
+        productRepository.save(productItem);
+        log.info("Продукт {} сохранен в базу данных", productRequest.skuCode());
     }
     @Transactional
     public void deleteProductBySkuCode(String skuCode) {
@@ -62,5 +65,6 @@ public class ProductService {
             throw new ResourceNotFoundException();
         }
         productRepository.deleteBySkuCode(skuCode);
+        log.info("Продукт {} удален из базы данных", skuCode);
     }
 }
