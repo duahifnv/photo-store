@@ -35,6 +35,10 @@ public class ProductService {
                 Sort.by(Sort.Direction.ASC, "price")
         );
     }
+    public ProductItem findItemBySkuCode(String skuCode) {
+        return productRepository.findBySkuCode(skuCode)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
     public List<ProductCategory> findAllCategories() {
         return categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
@@ -51,5 +55,12 @@ public class ProductService {
         productRepository.save(
                 productMapper.toProductItem(productRequest)
         );
+    }
+    @Transactional
+    public void deleteProductBySkuCode(String skuCode) {
+        if (!productRepository.existsBySkuCode(skuCode)) {
+            throw new ResourceNotFoundException();
+        }
+        productRepository.deleteBySkuCode(skuCode);
     }
 }

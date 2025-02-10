@@ -23,6 +23,10 @@ public class InventoryService {
         return inventoryRepository.findAll(Sort.by(Sort.Direction.ASC,
                 "skuCode"));
     }
+    public InventoryItem findItemBySkuCode(String skuCode) {
+        return inventoryRepository.findBySkuCode(skuCode)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
     public boolean isInStock(String skuCode, Integer quantity) {
         return inventoryRepository
                 .existsBySkuCodeAndQuantityGreaterThanEqual(skuCode, quantity);
@@ -33,9 +37,7 @@ public class InventoryService {
                 .findById(inventoryUpdate.skuCode());
         if (optionalInventoryItem.isEmpty())  {
             if (!productRepository.existsById(inventoryUpdate.skuCode())) {
-                throw new ResourceNotFoundException(
-                        "Не найден продукт с SKU-code: " + inventoryUpdate.skuCode()
-                );
+                throw new ResourceNotFoundException();
             }
             if (inventoryUpdate.updateType() == InventoryUpdate.UpdateType.EXPENSE) {
                 throw new BadRequestException(
@@ -69,7 +71,7 @@ public class InventoryService {
     @Transactional
     public void deleteItemBySkuCode(String skuCode) {
         if (!inventoryRepository.existsBySkuCode(skuCode)) {
-            throw new ResourceNotFoundException("Не найден продукт с SKU-code: " + skuCode);
+            throw new ResourceNotFoundException();
         }
         inventoryRepository.deleteBySkuCode(skuCode);
     }
