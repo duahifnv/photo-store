@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/order")
@@ -21,5 +22,10 @@ public record OrderController(OrderService orderService) {
     @ResponseStatus(HttpStatus.CREATED)
     public CreatedOrder createOrder(@RequestBody OrderRequest orderRequest) {
         return orderService.createOrder(orderRequest);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteOrderById(@PathVariable UUID id) {
+        orderService.deleteOrderById(id);
     }
 }
