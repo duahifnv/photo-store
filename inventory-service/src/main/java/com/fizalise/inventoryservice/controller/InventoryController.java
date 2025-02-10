@@ -16,6 +16,10 @@ public record InventoryController(InventoryService inventoryService) {
     public List<InventoryItem> getAllItems() {
         return inventoryService.findAllItems();
     }
+    @GetMapping("/{skuCode}")
+    public InventoryItem getItemBySkuCode(@PathVariable String skuCode) {
+        return inventoryService.findItemBySkuCode(skuCode);
+    }
     @GetMapping("/in-stock")
     @ResponseStatus(HttpStatus.OK)
     public boolean isInStock(@RequestParam String skuCode, @RequestParam Integer quantity) {
@@ -26,9 +30,9 @@ public record InventoryController(InventoryService inventoryService) {
     public void updateInventory(@RequestBody InventoryUpdate inventoryUpdate) {
         inventoryService.updateInventory(inventoryUpdate);
     }
-    @DeleteMapping
+    @DeleteMapping("/{skuCode}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteItemBySkuCode(@RequestParam String skuCode) {
+    public void deleteItemBySkuCode(@PathVariable String skuCode) {
         inventoryService.deleteItemBySkuCode(skuCode);
     }
 }
