@@ -11,7 +11,6 @@ import java.util.UUID;
 @Table(name = "orders", schema = "public", catalog = "order_service")
 @Data
 public class Order {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "order_id")
     private UUID orderId;
