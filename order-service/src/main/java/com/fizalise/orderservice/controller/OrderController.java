@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/api/v1/order")
 public record OrderController(OrderService orderService) {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

@@ -13,8 +13,6 @@ server:
   port: 8081
   error:
     include-message: always
-  servlet:
-    context-path: /api/v1
 client:
   inventory-service:
     url: http://localhost:8080

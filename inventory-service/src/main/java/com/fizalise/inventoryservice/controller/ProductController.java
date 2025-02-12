@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventory/products")
+@RequestMapping("/api/v1/inventory/products")
 public record ProductController(ProductService productService) {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
