@@ -25,6 +25,20 @@ services:
     ports:
       - "15433:5432"
     restart: unless-stopped
+  users-db:
+    container_name: users-db
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - ./docker/users-db:/docker-entrypoint-initdb.d
+      - users-db-data:/var/lib/postgresql/data
+    ports:
+      - "15434:5432"
+    restart: unless-stopped
 volumes:
   inventory-service-db-data:
   order-service-db-data:
+  users-db-data:

@@ -1,5 +1,14 @@
 spring:
   application:
     name: api-gateway
+  datasource:
+    url: jdbc:postgresql://localhost:15434/users
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
 server:
   port: 9000
