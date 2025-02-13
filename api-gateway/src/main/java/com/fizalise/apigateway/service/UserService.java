@@ -29,17 +29,17 @@ public class UserService {
         return this::getUserByUsername;
     }
     @Transactional
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
     @Transactional
-    public void create(User user) {
+    public User create(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new UserAlreadyExistsException("Пользователь с таким именем уже существует");
         }
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new UserAlreadyExistsException("Пользователь с такой почтой уже существует");
         }
-        this.save(user);
+        return save(user);
     }
 }
