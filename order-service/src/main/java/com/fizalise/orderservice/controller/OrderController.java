@@ -4,6 +4,7 @@ import com.fizalise.orderservice.dto.CreatedOrder;
 import com.fizalise.orderservice.dto.OrderRequest;
 import com.fizalise.orderservice.entity.Order;
 import com.fizalise.orderservice.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public record OrderController(OrderService orderService) {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedOrder createOrder(@RequestBody OrderRequest orderRequest) {
+    public CreatedOrder createOrder(@Valid @RequestBody OrderRequest orderRequest) {
         return orderService.createOrder(orderRequest);
     }
     @DeleteMapping("/{id}")
