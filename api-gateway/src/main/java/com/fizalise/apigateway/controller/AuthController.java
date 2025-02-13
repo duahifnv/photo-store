@@ -16,8 +16,6 @@ public class AuthController {
     private final AuthService authService;
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    // TODO: 13.02.2025 add global exception handler
-    // TODO: 13.02.2025 add field validation
     public JwtResponse registerNewUser(@Valid @RequestBody RegistrationRequest registrationRequest) {
         return authService.registerNewUser(registrationRequest);
     }
