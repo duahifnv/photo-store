@@ -29,6 +29,10 @@ public class OrderService {
                 Sort.by(Sort.Direction.DESC, "orderTimestamp")
         );
     }
+    public Order findOrderById(UUID id) {
+        return orderRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
     @Transactional
     public CreatedOrder createOrder(OrderRequest orderRequest) {
         inventoryClient.updateInventory(
