@@ -4,6 +4,7 @@ import com.fizalise.inventoryservice.dto.ProductRequest;
 import com.fizalise.inventoryservice.entity.ProductCategory;
 import com.fizalise.inventoryservice.entity.ProductItem;
 import com.fizalise.inventoryservice.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public record ProductController(ProductService productService) {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewProduct(@RequestBody ProductRequest productRequest) {
+    public void createNewProduct(@Valid @RequestBody ProductRequest productRequest) {
         productService.createNewProduct(productRequest);
     }
     @DeleteMapping("/{skuCode}")

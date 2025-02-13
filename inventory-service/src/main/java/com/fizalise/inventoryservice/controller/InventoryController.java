@@ -3,6 +3,7 @@ package com.fizalise.inventoryservice.controller;
 import com.fizalise.inventoryservice.dto.InventoryUpdate;
 import com.fizalise.inventoryservice.entity.InventoryItem;
 import com.fizalise.inventoryservice.service.InventoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public record InventoryController(InventoryService inventoryService) {
     }
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void updateInventory(@RequestBody InventoryUpdate inventoryUpdate) {
+    public void updateInventory(@Valid @RequestBody InventoryUpdate inventoryUpdate) {
         inventoryService.updateInventory(inventoryUpdate);
     }
     @DeleteMapping("/{skuCode}")
