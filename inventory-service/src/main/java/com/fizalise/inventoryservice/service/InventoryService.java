@@ -42,7 +42,7 @@ public class InventoryService {
             if (!productRepository.existsById(inventoryUpdate.skuCode())) {
                 throw new ResourceNotFoundException();
             }
-            if (inventoryUpdate.updateType() == InventoryUpdate.UpdateType.EXPENSE) {
+            if (inventoryUpdate.updateType().equals("EXPENSE")) {
                 throw new BadRequestException(
                         "Невозможно выполнить расход: товара еще нет в наличии"
                 );
@@ -55,7 +55,7 @@ public class InventoryService {
         }
         else {
             inventoryItem = optionalInventoryItem.get();
-            if (inventoryUpdate.updateType() == InventoryUpdate.UpdateType.EXPENSE) {
+            if (inventoryUpdate.updateType().equals("EXPENSE")) {
                 if (inventoryUpdate.quantity() > inventoryItem.getQuantity()) {
                     throw new BadRequestException(
                             "Невозможно выполнить расход: в наличии товаров меньше, чем в расходе"
