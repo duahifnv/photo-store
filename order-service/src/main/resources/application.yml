@@ -9,6 +9,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema.registry.url: http://localhost:8085
+    template:
+      default-topic: ${topics.order-notification}
 server:
   port: 8081
   error:
@@ -16,3 +25,5 @@ server:
 client:
   inventory-service:
     url: http://localhost:8080
+topics:
+  order-notification: order-notification
