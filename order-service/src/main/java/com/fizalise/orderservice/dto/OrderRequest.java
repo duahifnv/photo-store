@@ -10,6 +10,6 @@ public record OrderRequest(@NotBlank String skuCode,
                            @NotNull @Min(1) Integer quantity,
                            @Valid @NotNull UserDetails userDetails) {
     public record UserDetails(@NotNull @Email String email,
-                              String firstName,
-                              String lastName) {}
+                              @NotBlank String firstName,
+                              @NotBlank String lastName) {}
 }

@@ -29,4 +29,8 @@ public class Order {
     @Basic
     @Column(name = "order_timestamp")
     private Timestamp orderTimestamp;
+    @Transient
+    private String firstName;
+    @Transient
+    private String lastName;
 }
