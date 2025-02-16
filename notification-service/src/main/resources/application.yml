@@ -10,5 +10,10 @@ spring:
       properties:
         schema.registry.url: http://127.0.0.1:8085
         specific.avro.reader: true
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: fc24148dc518a6
+    password: 4bc27075ea90d6
 server:
   port: 8082
