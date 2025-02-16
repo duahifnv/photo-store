@@ -1,7 +1,6 @@
 package com.fizalise.apigateway.config;
 
 import com.fizalise.apigateway.service.UserService;
-import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

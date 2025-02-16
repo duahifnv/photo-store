@@ -1,7 +1,6 @@
 package com.fizalise.notificationservice.service;
 
 import com.fizalise.orderservice.event.OrderPlacedEvent;
-import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
