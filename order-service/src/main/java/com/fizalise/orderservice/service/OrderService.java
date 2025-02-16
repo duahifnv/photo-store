@@ -54,9 +54,9 @@ public class OrderService {
     }
     public void sendOrderEvent(String topicId, Order order) {
         OrderPlacedEvent orderPlacedEvent = orderMapper.toEvent(order);
-        log.info("Отправка OrderPlacedEvent в топик %s...".formatted(topicId));
+        log.info("Отправка сообщения о созданном заказе в топик %s...".formatted(topicId));
         kafkaTemplate.send(topicId, orderPlacedEvent);
-        log.info("Ивент успешно отправлен в топик %s...".formatted(topicId));
+        log.info("Сообщение успешно отправлено в топик %s...".formatted(topicId));
     }
     @Transactional
     public void deleteOrderById(UUID id) {
