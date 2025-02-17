@@ -1,7 +1,11 @@
 package com.fizalise.apigateway.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fizalise.apigateway.dto.ClientErrorResponse;
 import com.fizalise.apigateway.dto.ValidationErrorResponse;
 import com.fizalise.apigateway.dto.Violation;
+import com.fizalise.apigateway.exception.ServerException;
 import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -24,6 +29,21 @@ public class GlobalControllerExceptionHandler {
     public String handle(Exception e) {
         log.error("Unhandled exception [%s]: %s".formatted(e.getClass().getSimpleName(), e.getMessage()));
         return "Сбой на сервере";
+    }
+    @ExceptionHandler(HttpClientErrorException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ClientErrorResponse handle(HttpClientErrorException e) {
+        try {
+            String responseBody = e.getResponseBodyAsString();
+            log.error("Выброшено исключение от клиента: {}", responseBody);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readValue(responseBody, ClientErrorResponse.class);
+        }
+        catch (JsonProcessingException jpe) {
+            log.error("Ошибка JSON-парсинга: {}", jpe.getMessage());
+            throw new ServerException();
+        }
     }
     @ExceptionHandler(JwtException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
