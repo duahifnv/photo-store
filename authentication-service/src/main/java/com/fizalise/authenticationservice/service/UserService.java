@@ -1,8 +1,8 @@
-package com.fizalise.apigateway.service;
+package com.fizalise.authenticationservice.service;
 
-import com.fizalise.apigateway.entity.User;
-import com.fizalise.apigateway.exception.UserAlreadyExistsException;
-import com.fizalise.apigateway.repository.UserRepository;
+import com.fizalise.authenticationservice.entity.User;
+import com.fizalise.authenticationservice.exception.UserAlreadyExistsException;
+import com.fizalise.authenticationservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

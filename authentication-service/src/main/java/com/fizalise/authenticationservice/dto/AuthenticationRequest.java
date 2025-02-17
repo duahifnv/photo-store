@@ -1,4 +1,4 @@
-package com.fizalise.apigateway.dto;
+package com.fizalise.authenticationservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,4 +1,4 @@
-package com.fizalise.apigateway.entity;
+package com.fizalise.authenticationservice.entity;
 
 public enum Role {
     ROLE_USER,

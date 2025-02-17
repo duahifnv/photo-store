@@ -1,4 +1,4 @@
-package com.fizalise.apigateway.service;
+package com.fizalise.authenticationservice.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

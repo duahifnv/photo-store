@@ -1,6 +1,6 @@
-package com.fizalise.apigateway.repository;
+package com.fizalise.authenticationservice.repository;
 
-import com.fizalise.apigateway.entity.User;
+import com.fizalise.authenticationservice.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

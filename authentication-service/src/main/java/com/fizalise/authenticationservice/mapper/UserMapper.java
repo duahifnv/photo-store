@@ -1,8 +1,8 @@
-package com.fizalise.apigateway.mapper;
+package com.fizalise.authenticationservice.mapper;
 
-import com.fizalise.apigateway.dto.RegistrationRequest;
-import com.fizalise.apigateway.entity.Role;
-import com.fizalise.apigateway.entity.User;
+import com.fizalise.authenticationservice.dto.RegistrationRequest;
+import com.fizalise.authenticationservice.entity.Role;
+import com.fizalise.authenticationservice.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
