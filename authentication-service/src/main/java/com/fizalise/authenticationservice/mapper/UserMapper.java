@@ -1,6 +1,7 @@
 package com.fizalise.authenticationservice.mapper;
 
 import com.fizalise.authenticationservice.dto.RegistrationRequest;
+import com.fizalise.authenticationservice.dto.UserInfo;
 import com.fizalise.authenticationservice.entity.Role;
 import com.fizalise.authenticationservice.entity.User;
 import org.mapstruct.Mapper;
@@ -15,6 +16,7 @@ public abstract class UserMapper {
     protected PasswordEncoder passwordEncoder;
     @Mapping(target = "password", qualifiedByName = "getEncodedPassword")
     public abstract User toUser(RegistrationRequest registrationRequest, Role role);
+    public abstract UserInfo toUserInfo(User userByUsername);
     @Named("getEncodedPassword")
     protected String encodePassword(String password) {
         return passwordEncoder.encode(password);

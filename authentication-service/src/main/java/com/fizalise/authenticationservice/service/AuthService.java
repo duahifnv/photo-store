@@ -1,9 +1,6 @@
 package com.fizalise.authenticationservice.service;
 
-import com.fizalise.authenticationservice.dto.AuthenticationRequest;
-import com.fizalise.authenticationservice.dto.JwtResponse;
-import com.fizalise.authenticationservice.dto.RegistrationRequest;
-import com.fizalise.authenticationservice.dto.UserAuthorities;
+import com.fizalise.authenticationservice.dto.*;
 import com.fizalise.authenticationservice.entity.Role;
 import com.fizalise.authenticationservice.entity.User;
 import com.fizalise.authenticationservice.exception.CustomBadCredentialsException;
@@ -55,5 +52,10 @@ public record AuthService(JwtService jwtService,
         } catch (JwtException e) {
             throw new InvalidTokenException();
         }
+    }
+    public UserInfo getUserInfo(String username) {
+        return userMapper.toUserInfo(
+                userService.getUserByUsername(username)
+        );
     }
 }
