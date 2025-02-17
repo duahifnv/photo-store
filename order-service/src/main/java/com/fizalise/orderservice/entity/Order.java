@@ -30,7 +30,7 @@ public class Order {
     @Column(name = "order_timestamp")
     private Timestamp orderTimestamp;
     @Transient
-    private String firstName;
+    private String name;
     @Transient
-    private String lastName;
+    private String surname;
 }

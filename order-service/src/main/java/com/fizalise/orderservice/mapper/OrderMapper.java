@@ -1,5 +1,6 @@
 package com.fizalise.orderservice.mapper;
 
+import com.fizalise.orderservice.client.dto.UserInfo;
 import com.fizalise.orderservice.dto.OrderRequest;
 import com.fizalise.orderservice.entity.Order;
 import com.fizalise.orderservice.event.OrderPlacedEvent;
@@ -15,10 +16,10 @@ import java.util.UUID;
 public interface OrderMapper {
     @Mapping(target = "orderId", expression = "java(UUID.randomUUID())")
     @Mapping(target = "orderTimestamp", expression = "java(Timestamp.from(Instant.now()))")
-    @Mapping(source = "userDetails.email", target = "customerEmail")
-    @Mapping(source = "userDetails.firstName", target = "firstName")
-    @Mapping(source = "userDetails.lastName", target = "lastName")
-    Order toOrder(OrderRequest orderRequest);
+    @Mapping(source = "userInfo.email", target = "customerEmail")
+    @Mapping(source = "userInfo.name", target = "name")
+    @Mapping(source = "userInfo.surname", target = "surname")
+    Order toOrder(OrderRequest orderRequest, UserInfo userInfo);
     @Mapping(source = "customerEmail", target = "email")
     @Mapping(source = "orderId", target = "orderId", qualifiedByName = "idToSequence")
     OrderPlacedEvent toEvent(Order order);
