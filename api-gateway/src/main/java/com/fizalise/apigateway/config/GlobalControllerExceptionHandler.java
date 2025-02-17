@@ -1,7 +1,7 @@
 package com.fizalise.apigateway.config;
 
-import com.fizalise.apigateway.dto.violation.ValidationErrorResponse;
-import com.fizalise.apigateway.dto.violation.Violation;
+import com.fizalise.apigateway.dto.ValidationErrorResponse;
+import com.fizalise.apigateway.dto.Violation;
 import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;

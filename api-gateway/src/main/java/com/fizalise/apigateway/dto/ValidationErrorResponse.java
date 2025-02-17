@@ -1,4 +1,4 @@
-package com.fizalise.apigateway.dto.violation;
+package com.fizalise.apigateway.dto;
 
 import java.util.List;
 
