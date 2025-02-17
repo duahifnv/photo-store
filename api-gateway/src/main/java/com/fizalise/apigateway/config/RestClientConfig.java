@@ -17,6 +17,12 @@ public class RestClientConfig {
     public AuthClient authenticationClient() {
         RestClient restClient = RestClient.builder()
                 .baseUrl(authenticationServiceUrl)
+                .defaultHeaders(
+                        headers -> {
+                            headers.set("username", "rest-client");
+                            headers.set("authorities", "ROLE_ADMIN");
+                        }
+                )
                 .build();
         return HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient))
                 .build()
