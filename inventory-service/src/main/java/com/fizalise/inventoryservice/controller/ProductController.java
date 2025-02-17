@@ -5,14 +5,21 @@ import com.fizalise.inventoryservice.entity.ProductCategory;
 import com.fizalise.inventoryservice.entity.ProductItem;
 import com.fizalise.inventoryservice.service.ProductService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/inventory/products")
-public record ProductController(ProductService productService) {
+@RequiredArgsConstructor
+@Slf4j
+public class ProductController {
+    private final ProductService productService;
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ProductItem> getAllItems(
