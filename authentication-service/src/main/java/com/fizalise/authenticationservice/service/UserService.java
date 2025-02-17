@@ -2,10 +2,10 @@ package com.fizalise.authenticationservice.service;
 
 import com.fizalise.authenticationservice.entity.User;
 import com.fizalise.authenticationservice.exception.UserAlreadyExistsException;
+import com.fizalise.authenticationservice.exception.UserNotFoundException;
 import com.fizalise.authenticationservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,15 +15,11 @@ public class UserService {
     private final UserRepository userRepository;
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("Пользователь с таким именем не найден")
-                );
+                .orElseThrow(UserNotFoundException::new);
     }
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("Пользователь с таким именем не найден")
-                );
+                .orElseThrow(UserNotFoundException::new);
     }
     public UserDetailsService getUserDetailsService() {
         return this::getUserByUsername;
