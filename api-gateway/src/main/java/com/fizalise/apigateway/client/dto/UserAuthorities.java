@@ -1,4 +1,4 @@
-package com.fizalise.apigateway.client;
+package com.fizalise.apigateway.client.dto;
 
 import java.util.Collection;
 
