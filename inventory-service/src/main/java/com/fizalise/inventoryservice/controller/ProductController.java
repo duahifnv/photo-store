@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,11 +38,13 @@ public class ProductController {
     public List<ProductCategory> getAllCategories() {
         return productService.findAllCategories();
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewProduct(@Valid @RequestBody ProductRequest productRequest) {
         productService.createNewProduct(productRequest);
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{skuCode}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteProductBySkuCode(@PathVariable String skuCode) {

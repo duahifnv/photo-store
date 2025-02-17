@@ -4,14 +4,19 @@ import com.fizalise.inventoryservice.dto.InventoryUpdate;
 import com.fizalise.inventoryservice.entity.InventoryItem;
 import com.fizalise.inventoryservice.service.InventoryService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/inventory")
-public record InventoryController(InventoryService inventoryService) {
+@RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
+public class InventoryController {
+    private final InventoryService inventoryService;
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<InventoryItem> getAllItems() {
