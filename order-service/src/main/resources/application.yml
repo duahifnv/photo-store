@@ -25,5 +25,7 @@ server:
 client:
   inventory-service:
     url: http://localhost:8080
+  authentication-service:
+    url: http://localhost:8083
 topics:
   order-notification: order-notification
