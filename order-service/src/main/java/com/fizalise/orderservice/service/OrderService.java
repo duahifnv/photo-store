@@ -1,6 +1,8 @@
 package com.fizalise.orderservice.service;
 
+import com.fizalise.orderservice.client.AuthClient;
 import com.fizalise.orderservice.client.InventoryClient;
+import com.fizalise.orderservice.client.dto.UserInfo;
 import com.fizalise.orderservice.dto.InventoryUpdate;
 import com.fizalise.orderservice.dto.OrderRequest;
 import com.fizalise.orderservice.entity.Order;
@@ -25,6 +27,7 @@ import java.util.UUID;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final InventoryClient inventoryClient;
+    private final AuthClient authClient;
     private final OrderMapper orderMapper;
     private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
     @Value("${topics.order-notification}")
@@ -34,22 +37,26 @@ public class OrderService {
                 Sort.by(Sort.Direction.DESC, "orderTimestamp")
         );
     }
+    public List<Order> findAllOrders(String username) {
+        UserInfo userInfo = authClient.getUserInfo(username);
+        return orderRepository.findAllByCustomerEmail(userInfo.email());
+    }
     public Order findOrderById(UUID id) {
         return orderRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }
     @Transactional
-    public Order createOrder(OrderRequest orderRequest) {
+    public Order createOrder(OrderRequest orderRequest, String username) {
         inventoryClient.updateInventory(
                 InventoryUpdate.builder()
                         .updateType(InventoryUpdate.UpdateType.EXPENSE)
                         .skuCode(orderRequest.skuCode())
                         .quantity(orderRequest.quantity()).build()
         );
-        Order order = orderMapper.toOrder(orderRequest);
+        Order order = orderMapper.toOrder(orderRequest, authClient.getUserInfo(username));
         orderRepository.save(order);
         log.info("Заказ {} сохранен в базу данных", order);
-        sendOrderEvent(orderNotificationTopic, order);
+//        sendOrderEvent(orderNotificationTopic, order);
         return order;
     }
     public void sendOrderEvent(String topicId, Order order) {
