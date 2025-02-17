@@ -1,6 +1,5 @@
 package com.fizalise.orderservice.dto;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
