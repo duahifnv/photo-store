@@ -7,11 +7,17 @@ import com.fizalise.authenticationservice.dto.UserAuthorities;
 import com.fizalise.authenticationservice.entity.Role;
 import com.fizalise.authenticationservice.entity.User;
 import com.fizalise.authenticationservice.exception.CustomBadCredentialsException;
+import com.fizalise.authenticationservice.exception.InvalidTokenException;
 import com.fizalise.authenticationservice.mapper.UserMapper;
+import io.jsonwebtoken.JwtException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Collection;
 
 @Service
 public record AuthService(JwtService jwtService,
@@ -44,7 +50,12 @@ public record AuthService(JwtService jwtService,
         }
     }
     public UserAuthorities getAuthorities(String jwt) {
-        return new UserAuthorities(jwtService().extractUsername(jwt),
-                jwtService.extractRoles(jwt).stream().toList());
+        try {
+            String username = jwtService.extractUsername(jwt);
+            Collection<String> authorities = jwtService.extractRoles(jwt).stream().toList();
+            return new UserAuthorities(username, authorities);
+        } catch (JwtException e) {
+            throw new InvalidTokenException();
+        }
     }
 }
