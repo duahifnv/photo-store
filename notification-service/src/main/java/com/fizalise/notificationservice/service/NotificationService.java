@@ -35,10 +35,12 @@ public class NotificationService {
             messageHelper.setTo(orderPlacedEvent.getEmail().toString());
             messageHelper.setSubject("Ваш заказ успешно оформлен");
             messageHelper.setText("""
-                    Код вашего заказа: %s
+                    Здравствуйте, %s %s
+                    На ваше имя был успешно оформлен заказ с кодом %s
                                         
                     Компания PhotoStore благодарит вас за покупку!
-                    """.formatted(orderPlacedEvent.getOrderId().toString()));
+                    """.formatted(orderPlacedEvent.getName(), orderPlacedEvent.getSurname(),
+                    orderPlacedEvent.getOrderId()));
         };
     }
 }
