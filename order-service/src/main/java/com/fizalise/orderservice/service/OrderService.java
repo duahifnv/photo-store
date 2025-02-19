@@ -7,6 +7,7 @@ import com.fizalise.orderservice.dto.InventoryUpdate;
 import com.fizalise.orderservice.dto.OrderRequest;
 import com.fizalise.orderservice.entity.Order;
 import com.fizalise.orderservice.event.OrderPlacedEvent;
+import com.fizalise.orderservice.exception.BadRequestException;
 import com.fizalise.orderservice.exception.ResourceNotFoundException;
 import com.fizalise.orderservice.mapper.OrderMapper;
 import com.fizalise.orderservice.repository.OrderRepository;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.UUID;
@@ -56,7 +58,7 @@ public class OrderService {
         Order order = orderMapper.toOrder(orderRequest, authClient.getUserInfo(username));
         orderRepository.save(order);
         log.info("Заказ {} сохранен в базу данных", order);
-//        sendOrderEvent(orderNotificationTopic, order);
+        sendOrderEvent(orderNotificationTopic, order);
         return order;
     }
     public void sendOrderEvent(String topicId, Order order) {
