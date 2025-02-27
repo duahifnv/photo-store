@@ -86,7 +86,7 @@
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
         </dependency>
-        <!--        swagger-ui-->
+        <!--        swagger-ui (jackson bug fix)-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -96,6 +96,11 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
             <version>${swagger-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.16</version>
         </dependency>
         <!--        test-->
         <dependency>
