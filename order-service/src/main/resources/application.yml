@@ -29,3 +29,8 @@ client:
     url: http://localhost:8083
 topics:
   order-notification: order-notification
+springdoc:
+  swagger-ui:
+    path: /api/v1/swagger-ui
+  api-docs:
+    path: /api/v1/api-docs
