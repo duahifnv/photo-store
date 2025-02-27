@@ -8,3 +8,15 @@ server:
 client:
   authentication-service:
     url: http://localhost:8083
+springdoc:
+  swagger-ui:
+    path: /api/v1/swagger-ui
+    urls:
+      - name: Сервис учета товаров
+        url: /aggregate/inventory-service/v1/api-docs
+      - name: Сервис заказа товаров
+        url: /aggregate/order-service/v1/api-docs
+      - name: Сервис аутентификации
+        url: /aggregate/auth-service/v1/api-docs
+  api-docs:
+    path: /api/v1/api-docs
