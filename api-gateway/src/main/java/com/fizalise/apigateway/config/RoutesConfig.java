@@ -41,6 +41,12 @@ public class RoutesConfig {
                 .build();
     }
     @Bean
+    public RouterFunction<ServerResponse> imageServiceRoute() {
+        return route("image-service-route")
+                .route(path("/api/v1/images/**"), http("http://localhost:8084"))
+                .build();
+    }
+    @Bean
     public RouterFunction<ServerResponse> inventoryServiceRouteSwagger() {
         return route("inventory-service-route-swagger")
                 .route(path("/aggregate/inventory-service/v1/api-docs"), http("http://localhost:8080"))
@@ -58,6 +64,13 @@ public class RoutesConfig {
     public RouterFunction<ServerResponse> authenticationServiceRouteSwagger() {
         return route("authentication-service-route-swagger")
                 .route(path("/aggregate/auth-service/v1/api-docs"), http("http://localhost:8083"))
+                .filter(setPath("/api/v1/api-docs"))
+                .build();
+    }
+    @Bean
+    public RouterFunction<ServerResponse> imageServiceRouteSwagger() {
+        return route("image-service-route-swagger")
+                .route(path("/aggregate/image-service/v1/api-docs"), http("http://localhost:8084"))
                 .filter(setPath("/api/v1/api-docs"))
                 .build();
     }

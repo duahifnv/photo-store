@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: image-service
+  datasource:
+    url: jdbc:postgresql://localhost:15435/image_service
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8084
+  error:
+    include-message: always
+springdoc:
+  swagger-ui:
+    path: /api/v1/swagger-ui
+  api-docs:
+    path: /api/v1/api-docs
+  default-produces-media-type: image/png

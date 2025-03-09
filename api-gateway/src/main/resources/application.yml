@@ -18,5 +18,7 @@ springdoc:
         url: /aggregate/order-service/v1/api-docs
       - name: Сервис аутентификации
         url: /aggregate/auth-service/v1/api-docs
+      - name: Сервис изображений
+        url: /aggregate/image-service/v1/api-docs
   api-docs:
     path: /api/v1/api-docs
