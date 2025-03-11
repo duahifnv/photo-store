@@ -6,26 +6,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "category_image_filenames")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryImage {
-    @Id
+public class CategoryImage extends Image {
     @Size(min = 3, max = 3)
-    @Column(name = "category_code", nullable = false, length = 3)
-    public String categoryCode;
-    @Size(max = 50)
-    @NotNull
-    @Column(name = "image_type", nullable = false, length = 50)
-    private String type;
-    @Size(max = 200)
-    @NotNull
-    @Column(name = "image_filename", nullable = false, length = 200)
-    private String filename;
+    @Column(name = "id", nullable = false, length = 3)
+    public String id;
+    public CategoryImage(String id, String type, String filename) {
+        super(id, type, filename);
+        this.id = id;
+    }
 }

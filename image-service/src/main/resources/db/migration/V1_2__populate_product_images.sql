@@ -1,4 +1,4 @@
-INSERT INTO product_image_filenames (sku_code, image_type, image_filename) VALUES
+INSERT INTO product_image_filenames (id, image_type, image_filename) VALUES
 -- Canon RF 16mm f2.8 STM.jpg
 ('LEN-CANON-BL', 'image/jpeg', 'Canon RF 16mm f2.8 STM.jpg'),
 -- Вспышка Godox MF12 для макросъемки.jpeg
