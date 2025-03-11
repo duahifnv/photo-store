@@ -1,10 +1,9 @@
 package com.fizalise.imageservice.service;
 
+import com.fizalise.imageservice.entity.Image;
 import com.fizalise.imageservice.exception.ResourceNotFoundException;
-import com.fizalise.imageservice.repository.CategoryImageRepository;
-import com.fizalise.imageservice.repository.ProductImageRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,49 +14,45 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-public class ImageService {
-    private final ProductImageRepository productImageRepository;
-    private final CategoryImageRepository categoryImageRepository;
-    public enum ImageType {
-        PRODUCT("static/images/products"),
-        CATEGORY("static/images/categories");
-        public final String directoryPath;
-        ImageType(String directoryPath) {
-            this.directoryPath = directoryPath;
+public abstract class ImageService {
+    protected final JpaRepository<Image, String> imageRepository;
+    protected final String folderPath;
+    protected ImageService(JpaRepository<Image, String> imageRepository,
+                           String folderPath) {
+        this.imageRepository = imageRepository;
+        this.folderPath = folderPath;
+    }
+    public byte[] getImageBytes(String imageId) {
+        Image imageEntity = getImage(imageId);
+        return getImageBytes(folderPath, imageEntity.getFilename());
+    }
+    public Image getImage(String imageId) {
+        return imageRepository.findById(imageId)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+    public Image addImage(String imageId, MultipartFile imageFile) {
+        String filename = getImage(imageId).getFilename();
+        try {
+            imageFile.transferTo(getImagePath(folderPath, filename));
+            return saveImage(imageId, imageFile.getContentType(), filename);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
-    public byte[] getImageBytes(String imageId, ImageType imageType) {
-        String filename = getImageFilename(imageId, imageType);
-        Path imagePath = getImagePath(filename, imageType);
-        return getImageBytes(imagePath);
-    }
-    private byte[] getImageBytes(Path imagePath) {
+    public abstract Image saveImage(String imageId, String type, String filename);
+    protected byte[] getImageBytes(String folderPath, String filename) {
         try {
-            return Files.readAllBytes(imagePath);
+            Path path = getImagePath(folderPath, filename);
+            return Files.readAllBytes(path);
         } catch (NoSuchFileException e) {
             throw new ResourceNotFoundException();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public String getImageFilename(String imageId, ImageType imageType) {
-        switch (imageType) {
-            case PRODUCT -> {
-                return productImageRepository.findBySkuCode(imageId)
-                        .orElseThrow(ResourceNotFoundException::new).getFilename();
-            }
-            case CATEGORY -> {
-                return categoryImageRepository.findByCategoryCode(imageId)
-                        .orElseThrow(ResourceNotFoundException::new).getFilename();
-            }
-            default -> throw new IllegalArgumentException();
-        }
-    }
-    private Path getImagePath(String filename, ImageType imageType) {
+    protected Path getImagePath(String folderPath, String filename) {
         try {
-            Path fileClassPath = Path.of(imageType.directoryPath, filename);
+            Path fileClassPath = Path.of(folderPath, filename);
             URL resourceUrl = Optional.ofNullable(
                     getClass().getClassLoader().getResource(fileClassPath.toString())
             ).orElseThrow(ResourceNotFoundException::new);
