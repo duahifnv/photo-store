@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface ProductImageRepository extends JpaRepository<ProductImage, String> {
-    Optional<ProductImage> findBySkuCode(String skuCode);
 }

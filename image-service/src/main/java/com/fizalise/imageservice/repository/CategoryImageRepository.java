@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryImageRepository extends JpaRepository<CategoryImage, String> {
-    Optional<CategoryImage> findByCategoryCode(String categoryCode);
 }
