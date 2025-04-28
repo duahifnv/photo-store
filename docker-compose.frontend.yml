@@ -1,0 +1,12 @@
+services:
+  frontend-app:
+    build:
+      context: .
+      dockerfile: /docker/react/Dockerfile
+    volumes:
+      - ./react-frontend:/app
+      - ./react-frontend/node_modules:/app/node_modules
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
