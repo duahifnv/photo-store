@@ -5,6 +5,7 @@ import com.fizalise.imageservice.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -31,9 +32,10 @@ public abstract class ImageService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
     public Image addImage(String imageId, MultipartFile imageFile) {
-        String filename = getImage(imageId).getFilename();
+        String filename = imageFile.getOriginalFilename();
         try {
-            imageFile.transferTo(getImagePath(folderPath, filename));
+            Path imagePath = Path.of(folderPath, filename);
+            imageFile.transferTo(new File(getAbsoluteImagePath(imagePath).toString()));
             return saveImage(imageId, imageFile.getContentType(), filename);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -42,7 +44,7 @@ public abstract class ImageService {
     public abstract Image saveImage(String imageId, String type, String filename);
     protected byte[] getImageBytes(String folderPath, String filename) {
         try {
-            Path path = getImagePath(folderPath, filename);
+            Path path = getAbsoluteImagePath(Path.of(folderPath, filename));
             return Files.readAllBytes(path);
         } catch (NoSuchFileException e) {
             throw new ResourceNotFoundException();
@@ -50,11 +52,10 @@ public abstract class ImageService {
             throw new RuntimeException(e);
         }
     }
-    protected Path getImagePath(String folderPath, String filename) {
+    protected Path getAbsoluteImagePath(Path relativePath) {
         try {
-            Path fileClassPath = Path.of(folderPath, filename);
             URL resourceUrl = Optional.ofNullable(
-                    getClass().getClassLoader().getResource(fileClassPath.toString())
+                    getClass().getClassLoader().getResource(relativePath.toString())
             ).orElseThrow(ResourceNotFoundException::new);
             return Paths.get(resourceUrl.toURI());
         } catch (URISyntaxException e) {
