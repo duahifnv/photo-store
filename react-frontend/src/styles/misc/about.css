@@ -1,0 +1,62 @@
+body {
+    background-image: url('../img/backgrounds/pastel_blur2.jpg');
+}
+#information-cont{
+    background-color: white;
+    padding: 5%;
+    height: fit-content;
+}
+#bio-cont{
+    background-color: transparent;
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    margin-bottom: 5%;
+}
+#bio-cont img{
+    width: 30%;
+}
+#bio-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+}
+#projects-cont{
+    width: 100%;
+    height: 80vh;
+}
+#projects-cont h1{
+    font-size: 54px;
+    text-align: center;
+}
+#projects-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+#proj-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 45%;
+    height: 30%;
+}
+#proj-item #img-cont{
+    padding: 2%;
+    width: 50%;
+    max-height: 100%;
+}
+#proj-item img{
+    display: block;
+    width: 60%;
+    margin: auto;
+}
+#proj-item #text-cont{
+    padding: 2%;
+    font-size: 25px;
+    width: 50%;
+}

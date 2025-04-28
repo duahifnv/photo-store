@@ -1,0 +1,24 @@
+#item-wrapper{
+    display: flex;
+    width: 100%;
+    min-height: 250px;
+    max-height: 300px;
+}
+#item-img {
+    width: 40%;
+    height: 100%;
+}
+#item-wrapper img{
+    display: block;
+    width: auto;
+    height: 80%;
+    margin: 0 auto;
+}
+#item-info{
+    padding: 2%;
+    width: 60%;
+}
+#item-name, #current-price{
+    font-size: 26px;
+    font-weight: 600;
+}
