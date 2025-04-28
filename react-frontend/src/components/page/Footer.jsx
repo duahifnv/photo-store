@@ -1,6 +1,13 @@
-import "../styles/footer.css"
+import "../../styles/page/footer.css"
+import vk_logo from "../../assets/logos/social/vk_logo-48.png"
+import github_logo from "../../assets/logos/social/github_logo.png"
+import discord_logo from "../../assets/logos/social/discord_logo.png"
+import copyright_logo from "../../assets/logos/copyright_logo.png"
+import mir_logo from "../../assets/logos/payment/mir_logo.png"
+import qiwi_logo from "../../assets/logos/payment/qiwi_logo.png"
+import visa_logo from "../../assets/logos/payment/visa_logo.png"
 
-export default function Footer() {
+export const Footer = () => {
     return (
         <div id="page__footer">
             <div id="footer_container">
@@ -8,13 +15,13 @@ export default function Footer() {
                     <span>photoStore</span>
                     <div id="social-networks">
                         <a href="https://vk.com/fizalise">
-                            <img src="/img/social_icons/vk-48.png" alt="vk"/>
+                            <img src={vk_logo} alt="vk"/>
                         </a>
                         <a href="https://github.com/duahifnv">
-                            <img src="/img/social_icons/github.png" alt="github"/>
+                            <img src={github_logo} alt="github"/>
                         </a>
                         <a href="https://discord.com/users/363629160981200907/">
-                            <img src="/img/social_icons/discord.png" alt="discord"/>
+                            <img src={discord_logo} alt="discord"/>
                         </a>
                         <a href="mailto:mfomincev11@gmail.com"><b>Gmail</b></a>
                     </div>
@@ -30,17 +37,17 @@ export default function Footer() {
                 </div>
                 <div id="payments">
                     <a href="#">
-                        <img src="/img/payment_icons/visa.png" alt="visa"/>
+                        <img src={visa_logo} alt="visa"/>
                     </a>
                     <a href="#">
-                        <img src="/img/payment_icons/Mir.png" alt="mir"/>
+                        <img src={mir_logo} alt="mir"/>
                     </a>
                     <a href="#">
-                        <img src="/img/payment_icons/QIWI.png" alt="qiwi"/>
+                        <img src={qiwi_logo} alt="qiwi"/>
                     </a>
                 </div>
                 <div id="copyright">
-                    <img src="/img/copyright.png" alt="copyright-logo"/>
+                    <img src={copyright_logo} alt="copyright-logo"/>
                         <p>Все материалы сайта photoStore.ru,
                             любая текстовая, графическая или видео информация,
                             а также структура сайта и оформление страниц,
