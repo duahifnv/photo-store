@@ -1,3 +1,6 @@
+body {
+    background-image: url(../../assets/backgrounds/pastel_blur6.jpg);
+}
 #page__content{
     display: flex;
     flex-direction: column;

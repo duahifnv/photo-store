@@ -4,6 +4,7 @@ import {Footer} from "./page/Footer";
 import {Route, Routes} from "react-router-dom";
 import {CategoryPage} from "./page/CategoryPage";
 import '../styles/app.css';
+import {CompanyPage} from "./page/CompanyPage";
 
 export const App = () => {
   return (
@@ -12,6 +13,7 @@ export const App = () => {
           <Routes>
               <Route path='/' element={<MainPage />} />
               <Route path='/cameras' element={<CategoryPage label={'Фотоаппараты'} categoryCode={'CAM'}/>} />
+              <Route path='/company' element={<CompanyPage />} />
           </Routes>
           <Footer />
       </>

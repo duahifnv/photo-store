@@ -1,6 +1,6 @@
-/*body {*/
-/*    background-image: url(../../../src/assets/backgrounds/pastel_blur7.jpg);*/
-/*}*/
+body {
+    background-image: url(../../assets/backgrounds/pastel_blur7.jpg);
+}
 #page__content{
     width: 100%;
     min-height: fit-content;
