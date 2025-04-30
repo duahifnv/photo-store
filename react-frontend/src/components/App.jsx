@@ -13,6 +13,9 @@ export const App = () => {
           <Routes>
               <Route path='/' element={<MainPage />} />
               <Route path='/cameras' element={<CategoryPage label={'Фотоаппараты'} categoryCode={'CAM'}/>} />
+              <Route path='/lens' element={<CategoryPage label={'Объективы'} categoryCode={'LEN'}/>} />
+              <Route path='/flashes' element={<CategoryPage label={'Вспышки'} categoryCode={'FLS'}/>} />
+              <Route path='/optical' element={<CategoryPage label={'Оптические приборы'} categoryCode={'OPT'}/>} />
               <Route path='/company' element={<CompanyPage />} />
           </Routes>
           <Footer />

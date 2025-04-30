@@ -5,7 +5,7 @@ import discord_logo from "../../assets/logos/social/discord_logo.png"
 import copyright_logo from "../../assets/logos/copyright_logo.png"
 import mir_logo from "../../assets/logos/payment/mir_logo.png"
 import qiwi_logo from "../../assets/logos/payment/qiwi_logo.png"
-import visa_logo from "../../assets/logos/payment/visa_logo.png"
+import {Link} from "react-router-dom";
 
 export const Footer = () => {
     return (
@@ -28,23 +28,21 @@ export const Footer = () => {
                 </div>
                 <div id="information">
                     <h1>Информация</h1>
-                    <a href="/html/company.html">О компании</a>
-                    <a href="/html/company.html">Вакансии компании</a>
-                    <a href="/html/company.html">Соглашение об обработке персональных данных</a>
-                    <a href="/html/company.html">FAQ</a>
-                    <a href="/html/company.html">Контакты</a>
-                    <a href="/html/company.html">Обратная связь</a>
+                    <Link to={"/company"}></Link>
+                    <Link to={"/company"}>О компании</Link>
+                    <Link to={"/company"}>Вакансии компании</Link>
+                    <Link to={"/company"}>Соглашение об обработке персональных данных</Link>
+                    <Link to={"/company"}>FAQ</Link>
+                    <Link to={"/company"}>Контакты</Link>
+                    <Link to={"/company"}>Обратная связь</Link>
                 </div>
                 <div id="payments">
-                    <a href="#">
-                        <img src={visa_logo} alt="visa"/>
-                    </a>
-                    <a href="#">
+                    <Link to={"/"}>
                         <img src={mir_logo} alt="mir"/>
-                    </a>
-                    <a href="#">
+                    </Link>
+                    <Link to={"/"}>
                         <img src={qiwi_logo} alt="qiwi"/>
-                    </a>
+                    </Link>
                 </div>
                 <div id="copyright">
                     <img src={copyright_logo} alt="copyright-logo"/>
