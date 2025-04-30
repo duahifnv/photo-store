@@ -53,12 +53,9 @@ export const CategoryPage = (props) => {
                         <Item
                             key={product.skuCode}
                             label={product.name}
-                            itemProps={[
-                                `Цена: ${formatPrice(product.price)}`,
-                                `Дата выхода: ${product.releaseDate}`
-                            ]}
+                            releaseDate={product.releaseDate}
                             price={formatPrice(product.price)}
-                            prevPrice={formatPrice(product.price)}
+                            itemProps={product.properties}
                             imgSrc={images[product.skuCode]}
                             imgAlt={product.skuCode}
                         />

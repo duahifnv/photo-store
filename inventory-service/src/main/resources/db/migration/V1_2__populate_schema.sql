@@ -1,12 +1,129 @@
 insert into product_categories (category_code, name)
 values ('CAM', 'Фотоаппараты'), ('LEN', 'Объективы'), ('FLS', 'Вспышки'), ('OPT', 'Оптические приборы');
 
-insert into products (sku_code, name, category_code, price)
-values ('CAM-FUJIF-BL', 'Фотоаппарат Fujifilm X-T5 body черный', 'CAM', 189990.00),
-       ('LEN-CANON-BL', 'Объектив Canon RF 16mm f/2.8 STM', 'LEN', 29900.00),
-       ('FLS-FUJIF-BL', 'Вспышка Godox MF12 для макросъемки', 'FLS', 11560.00);
+-- Обновленные INSERT-запросы для таблицы products
+INSERT INTO products (sku_code, name, category_code, price, properties)
+VALUES
+-- Фотоаппараты (CAM)
+('CAM-FUJIF-BL', 'Фотоаппарат Fujifilm X-T5 body черный', 'CAM', 189990.00,
+ '{
+   "Разрешение матрицы": "26 Мпикс",
+   "Максимальное разрешение": "6240 х 4160",
+   "Диафрагма": "f/1.6 - f/16"
+ }'),
 
-insert into inventory (sku_code, quantity)
-values ('CAM-FUJIF-BL', 12),
-       ('LEN-CANON-BL', 5),
-       ('FLS-FUJIF-BL', 3);
+('CAM-CANON-6DMK2', 'Зеркальный фотоаппарат Canon EOS 6D Mark II Body', 'CAM', 120500.00,
+ '{
+   "Разрешение матрицы": "20 Мпикс",
+   "Максимальное разрешение": "1920 х 1080",
+   "Диафрагма": "f/1.4 - f/18"
+ }'),
+
+('CAM-FUJIF-INSTAX12', 'Моментальная фотокамера Fujifilm Instax Mini 12 Blue', 'CAM', 11900.00,
+ '{
+   "Разрешение матрицы": "10 Мпикс",
+   "Максимальное разрешение": "1280 х 720",
+   "Диафрагма": "f/1.6 - f/8"
+ }'),
+
+('CAM-SONY-ZVE10', 'Фотоаппарат Sony ZV-E10 kit 16-50mm черный', 'CAM', 89490.00,
+ '{
+   "Разрешение матрицы": "45 Мпикс",
+   "Максимальное разрешение": "4540 х 3800",
+   "Диафрагма": "f/1.2 - f/18"
+ }'),
+
+-- Объективы (LEN)
+('LEN-CANON-BL', 'Объектив Canon RF 16mm f/2.8 STM', 'LEN', 29990.00,
+ '{
+   "Максимальное разрешение": "2420 х 1920",
+   "Диафрагма": "f/2.8 - f/8"
+ }'),
+
+('LENS-LAOWA-12MM', 'Объектив Laowa 12mm f/2.8 Zero-D (Silver) для Canon-EF серебристый', 'LEN', 106590.00,
+ '{
+   "Максимальное разрешение": "5420 х 3800",
+   "Диафрагма": "f/2.8 - f/22"
+ }'),
+
+('LENS-CANON-50MM', 'Объектив Canon EF 50mm f/1.4 USM', 'LEN', 32990.00,
+ '{
+   "Максимальное разрешение": "2420 х 1920",
+   "Диафрагма": "f/1.4 - f/14"
+ }'),
+
+-- Вспышки (FLS)
+('FLS-FUJIF-BL', 'Вспышка Godox MF12 для макросъемки', 'FLS', 11560.00,
+ '{
+   "Время перезарядки": "0.01с",
+   "Зум": "ручной"
+ }'),
+
+('ACC-CANON-EL1', 'Фотовспышка Canon Speedlite EL-1', 'FLS', 78990.00,
+ '{
+   "Время перезарядки": "0.1с",
+   "Зум": "автоматический, ручной"
+ }'),
+
+('ACC-GODOX-V350S', 'Фотовспышка Godox V350S для Sony TTL', 'FLS', 17360.00,
+ '{
+   "Время перезарядки": "0.05с",
+   "Зум": "автоматический"
+ }'),
+
+('ACC-NIKON-SB5000', 'Фотовспышка Nikon Speedlight SB-5000', 'FLS', 69990.00,
+ '{
+   "Время перезарядки": "1с",
+   "Зум": "автоматический, ручной"
+ }'),
+
+-- Оптические приборы (OPT)
+('ACC-FALCON-EYES', 'Октобокс Falcon Eyes Fea-Ob20 BW 200 см', 'OPT', 10620.00,
+ '{
+   "Яркость": "12 000 нит",
+   "Вес": "9.8кг"
+ }'),
+
+('ACC-RAYLAB-LED09', 'Светодиодный осветитель Raylab RL-LED09RGB 2500-9900К 2600mAh', 'OPT', 3500.00,
+ '{
+   "Яркость": "5 000 нит",
+   "Цветовая палитра": "24 000 000 цветов"
+ }'),
+
+('ACC-KONUS-RANGE2', 'Бинокль Konus Konusrange-2 10x42 с дальномером 1200 м', 'OPT', 82440.00,
+ '{
+   "Максимальное увеличение": "Х10",
+   "Диаметр линз": "42нм"
+ }'),
+
+('ACC-SKYWATCHER-N130', 'Телескоп Sky-Watcher N130.650 StarQuest EQ1', 'OPT', 51290.00,
+ '{
+   "Тип телескопа": "рефлектор",
+   "Монтировка": "экваториальная"
+ }');
+
+-- Обновленные INSERT-запросы для таблицы inventory
+INSERT INTO inventory (sku_code, quantity)
+VALUES
+-- Фотоаппараты
+('CAM-FUJIF-BL', 12),
+('CAM-CANON-6DMK2', 8),
+('CAM-FUJIF-INSTAX12', 15),
+('CAM-SONY-ZVE10', 6),
+
+-- Объективы
+('LEN-CANON-BL', 5),
+('LENS-LAOWA-12MM', 3),
+('LENS-CANON-50MM', 7),
+
+-- Вспышки
+('FLS-FUJIF-BL', 3),
+('ACC-CANON-EL1', 4),
+('ACC-GODOX-V350S', 5),
+('ACC-NIKON-SB5000', 2),
+
+-- Оптические приборы
+('ACC-FALCON-EYES', 4),
+('ACC-RAYLAB-LED09', 10),
+('ACC-KONUS-RANGE2', 2),
+('ACC-SKYWATCHER-N130', 3);

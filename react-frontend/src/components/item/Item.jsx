@@ -1,6 +1,7 @@
 import '../../styles/item/item.css';
 
 export const Item = (props) => {
+  console.log(props.itemProps);
   return (
       <div id="item-wrapper">
           <div id="item-img">
@@ -9,14 +10,11 @@ export const Item = (props) => {
           <div id="item-info">
               <p id="item-name">{props.label}</p>
               <div id="item-props">
-                  {props.itemProps.map((prop) => {
-                      return <p>{prop}</p>
+                  {Object.entries(props.itemProps).map(([propKey, propValue]) => {
+                      return <p><b>{propKey}:</b> <code>{propValue}</code></p>
                   })}
               </div>
               <div id="item-price">
-                  {props.prevPrice && (
-                      <p id="previous-price"><s>{props.prevPrice}</s></p>
-                  )}
                   <p id="current-price">{props.price}</p>
               </div>
           </div>

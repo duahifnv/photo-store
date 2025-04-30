@@ -1,16 +1,19 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 create table product_categories(
     category_code char(3) primary key,
     name varchar(50) not null,
     description text
 );
 
-create table products(
-    sku_code varchar(30) primary key,
-    name varchar(200) not null,
-    category_code char(3) references product_categories(category_code)
-        on delete set null,
-    price numeric(10, 2),
-    release_date date not null default CURRENT_DATE
+CREATE TABLE products (
+      sku_code VARCHAR(30) PRIMARY KEY,
+      name VARCHAR(200) NOT NULL,
+      category_code CHAR(3) REFERENCES product_categories(category_code) ON DELETE SET NULL,
+      price NUMERIC(10, 2),
+      release_date DATE NOT NULL DEFAULT CURRENT_DATE,
+      properties JSONB DEFAULT '{}'::JSONB
 );
 
 create table inventory(
