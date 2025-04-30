@@ -5,8 +5,8 @@ INSERT INTO product_image_filenames (id, image_type, image_filename) VALUES
 ('FLS-FUJIF-BL', 'image/jpeg', 'Вспышка Godox MF12 для макросъемки.jpeg'),
 -- Canon EOS M50 Mark II kit EF-M 15-45mm.jpg
 ('CAM-CANON-M50MK2', 'image/jpeg', 'Canon EOS M50 Mark II kit EF-M 15-45mm.jpg'),
--- Canon EOS 6D Mark II MainPage.jpg
-('CAM-CANON-6DMK2', 'image/jpeg', 'Canon EOS 6D Mark II MainPage.jpg'),
+-- Canon EOS 6D Mark II Body.jpg
+('CAM-CANON-6DMK2', 'image/jpeg', 'Canon EOS 6D Mark II Body.jpg'),
 -- Canon EOS 2000D.jpg
 ('CAM-CANON-2000D', 'image/jpeg', 'Canon EOS 2000D.jpg'),
 -- Falcon Eyes Fea-Ob20 BW 200.png
