@@ -70,10 +70,6 @@ export const CatalogPage = () => {
         }).format(price).replace('₽', '₽');
     };
 
-    const handlePriceFilterChange = () => {
-        // Фильтрация произойдет автоматически благодаря useEffect
-    };
-
     const handleSortChange = (order: 'asc' | 'desc') => {
         setSortOrder(order);
     };
@@ -110,8 +106,6 @@ export const CatalogPage = () => {
                             min="0"
                         />
                     </label>
-
-                    <button onClick={handlePriceFilterChange}>Применить фильтр</button>
                 </div>
 
                 <div className="sort-options">

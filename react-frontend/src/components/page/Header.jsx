@@ -57,10 +57,10 @@ export const Header = () => {
                     <img src={logo} alt={"photoStore"}/>
                 </div>
             </div>
-            <form id="search-bar" action="" method="get">
-                <input id="search" type="text" name="text" placeholder="Выбрать товар" />
-                <input id="submit" type="submit" name="submit" value="Поиск"/>
-            </form>
+            {/*<form id="search-bar" action="" method="get">*/}
+            {/*    <input id="search" type="text" name="text" placeholder="Выбрать товар" />*/}
+            {/*    <input id="submit" type="submit" name="submit" value="Поиск"/>*/}
+            {/*</form>*/}
             <div id="nav">
                 {isAuthenticated && (
                     <div className="cart-icon-container">

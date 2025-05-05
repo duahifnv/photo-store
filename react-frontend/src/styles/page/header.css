@@ -105,7 +105,7 @@ input{
     display: flex !important;
     align-items: center;
     height: 100%;
-    padding: 0 10px;
+    padding: 0 30px;
 }
 
 /* Добавляем стили для иконок и бейджа корзины */
@@ -123,8 +123,8 @@ input{
 
 .cart-badge {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -10px;
+    right: 20px;
     background-color: #ff4d4d;
     color: white;
     border-radius: 50%;
