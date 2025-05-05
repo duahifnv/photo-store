@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider.tsx';
+
 import { Header } from './page/Header';
 import { Footer } from './page/Footer';
 import { MainPage } from './page/MainPage';
@@ -7,13 +8,12 @@ import { CategoryPage } from './page/CategoryPage';
 import { CompanyPage } from './page/CompanyPage';
 import { AuthPage } from './page/AuthPage';
 
-import '../styles/app.css';
 import {CatalogPage} from "./page/CatalogPage.tsx";
 import {CheckoutPage} from "./page/CheckoutPage";
 import {RequireAuth} from "./context/RequireAuth";
-// import { ProfilePage } from './page/ProfilePage';
-// import { CheckoutPage } from './page/CheckoutPage';
-// import { RequireAuth } from './page/RequireAuth';
+import {FavoritesPage} from "./page/FavoritesPage";
+
+import '../styles/app.css';
 
 export const App = () => {
     return (
@@ -23,6 +23,8 @@ export const App = () => {
                 <Route path='/' element={<MainPage />} />
                 <Route path='/auth' element={<AuthPage />} />
                 <Route path='/catalog' element={<CatalogPage />} />
+
+                <Route path='/favorites' element={<FavoritesPage />} />
 
                 <Route path='/cameras' element={<CategoryPage label={'Фотоаппараты'} categoryCode={'CAM'}/>} />
                 <Route path='/lens' element={<CategoryPage label={'Объективы'} categoryCode={'LEN'}/>} />

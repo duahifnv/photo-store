@@ -47,6 +47,7 @@ export const Header = () => {
                                     <li><Link to={"/optical"}>Оптические приборы</Link></li>
                                 </ul>
                             </li>
+                            <li><Link to={"/favorites"}>Избранное</Link></li>
                             <li><Link to={"/about"}>Об авторе</Link></li>
                             <li><Link to={"/company"}>О фирме</Link></li>
                         </ul>
