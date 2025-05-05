@@ -1,15 +1,40 @@
-import "../../styles/page/header.css"
-import dropdown_button from "../../assets/ui/nav_dropdown_button.png"
-import logo from "../../assets/logos/photostore_logo.png"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+
+import navDropdownIcon from "../../assets/icons/camera-icon.png";
+import profileIcon from "../../assets/icons/profile-icon.png";
+import cartIcon from "../../assets/icons/cart-icon.png";
+
+import logo from "../../assets/logos/photostore_logo.png";
+import "../../styles/page/header.css";
+
+import {useAuth} from "../context/AuthProvider.tsx";
 
 export const Header = () => {
+    const { isAuthenticated } = useAuth();
+    const [cartItemsCount, setCartItemsCount] = useState(0);
+
+    useEffect(() => {
+        // Загрузка корзины из localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCartItemsCount(cart.length);
+
+        // Подписка на изменения корзины
+        const handleStorageChange = () => {
+            const updatedCart = JSON.parse(localStorage.getItem('cart')) || [];
+            setCartItemsCount(updatedCart.length);
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
+
     return (
         <div id="page__header">
             <div id="logo__inner">
                 <div id="dropdown">
                     <button>
-                        <img src={dropdown_button} alt="Меню"/>
+                        <img src={navDropdownIcon} alt="Меню"/>
                     </button>
                     <div id="nav-content">
                         <ul id="nav-list">
@@ -37,9 +62,23 @@ export const Header = () => {
                 <input id="submit" type="submit" name="submit" value="Поиск"/>
             </form>
             <div id="nav">
-                <Link to={"/cart"}>Корзина</Link>
-                <Link to={"/login"}>Войти</Link>
-                <Link to={"/register"}>Регистрация</Link>
+                {isAuthenticated && (
+                    <div className="cart-icon-container">
+                        <Link to="/checkout">
+                            <img src={cartIcon} alt="Корзина" className="nav-icon"/>
+                            {cartItemsCount > 0 && (
+                                <span className="cart-badge">{cartItemsCount}</span>
+                            )}
+                        </Link>
+                    </div>
+                )}
+                <Link to={isAuthenticated ? "/profile" : "/auth"} className="auth-link">
+                    {isAuthenticated ? (
+                        <img src={profileIcon} alt="Профиль" className="nav-icon"/>
+                    ) : (
+                        "Войти"
+                    )}
+                </Link>
             </div>
         </div>
     )

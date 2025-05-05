@@ -54,7 +54,7 @@ export const CompanyPage = () => {
                             Карты</a>
                         <iframe
                             src="https://yandex.ru/map-widget/v1/?azimuth=3.6475277415024374&ll=39.708028%2C47.235448&mode=routes&rtext=47.236422%2C39.713777~47.235559%2C39.708183&rtt=auto&ruri=~&z=18.01"
-                            frameBorder="1" allowFullScreen="true"></iframe>
+                            frameBorder="1" allowFullScreen={true}></iframe>
                     </div>
                 </div>
                 <div id="feedback-wrap">

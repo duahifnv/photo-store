@@ -1,7 +1,6 @@
 import '../../styles/item/item.css';
 
 export const Item = (props) => {
-  console.log(props.itemProps);
   return (
       <div id="item-wrapper">
           <div id="item-img">

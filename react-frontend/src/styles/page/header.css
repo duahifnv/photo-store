@@ -94,14 +94,50 @@ input{
 #search{
     width: 100%;
 }
-#nav{
-    display: table;
-    font-weight: 600;
-    font-size: 18px;
-    height: 100%;
+
+#nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
-#nav a{
-    display: table-cell;
-    vertical-align: middle;
+
+#nav a {
+    display: flex !important;
+    align-items: center;
+    height: 100%;
     padding: 0 10px;
+}
+
+/* Добавляем стили для иконок и бейджа корзины */
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.cart-icon-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-link {
+    display: flex !important;
+    align-items: center;
+    height: 100%;
 }
