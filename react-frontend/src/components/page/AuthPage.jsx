@@ -96,9 +96,8 @@ export const AuthPage = () => {
     return (
         <div id="page__content">
             <div id="welcome-screen">
-                <p id="welcome-text">Вход в систему</p>
                 <div className="auth-container">
-                    <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
+                    <h3>{isLogin ? 'Вход' : 'Регистрация'}</h3>
                     {error && <div className="error-message">{error}</div>}
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">

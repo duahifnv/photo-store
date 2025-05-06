@@ -1,5 +1,6 @@
 .checkout-container {
     max-width: 800px;
+    min-height: 75vh;
     margin: 0 auto;
     padding: 100px;
 }
@@ -18,12 +19,13 @@
     margin-top: 30px;
     overflow-y: scroll;
     height: 75%;
+    padding: 0 10px;
 }
 
 .cart-item {
     display: flex;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     border-bottom: 1px solid #eee;
     padding: 20px 30px;
 }

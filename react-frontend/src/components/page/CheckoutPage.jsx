@@ -84,9 +84,9 @@ export const CheckoutPage = () => {
                                     </div>
                                     <div className="item-details">
                                         <h3>{item.name}</h3>
-                                        <p>Цена: {item.price}</p>
-                                        <p>Количество: {item.quantity}</p>
-                                        <p>Сумма: {formatPrice(item.price) * item.quantity} ₽</p>
+                                        <p>Цена: <code>{formatPrice(item.price)} ₽</code></p>
+                                        <p>Количество: <code>{item.quantity}</code></p>
+                                        <p>Сумма: <b><code>{formatPrice(item.price) * item.quantity} ₽</code></b></p>
                                     </div>
                                 </div>
                             ))}

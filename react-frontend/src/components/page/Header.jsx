@@ -48,7 +48,6 @@ export const Header = () => {
                                 </ul>
                             </li>
                             <li><Link to={"/favorites"}>Избранное</Link></li>
-                            <li><Link to={"/about"}>Об авторе</Link></li>
                             <li><Link to={"/company"}>О фирме</Link></li>
                         </ul>
                         <div id="nav-blackout"></div>
@@ -73,7 +72,7 @@ export const Header = () => {
                         </Link>
                     </div>
                 )}
-                <Link to={isAuthenticated ? "/profile" : "/auth"} className="auth-link">
+                <Link to={isAuthenticated ? "" : "/auth"} className="auth-link">
                     {isAuthenticated ? (
                         <img src={profileIcon} alt="Профиль" className="nav-icon"/>
                     ) : (
