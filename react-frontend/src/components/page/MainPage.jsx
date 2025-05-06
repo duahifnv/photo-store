@@ -5,7 +5,6 @@ import flash_icon from '../../assets/icons/camera-flash.png';
 import '../../styles/page/main-page.css';
 
 import {Popular} from "../item/Popular";
-import {Item} from "../item/Item";
 
 export const MainPage = () => {
     return (

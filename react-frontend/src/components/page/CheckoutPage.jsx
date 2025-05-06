@@ -71,36 +71,42 @@ export const CheckoutPage = () => {
     }
 
     return (
-        <div className="checkout-container">
-            <h2>Оформление заказа</h2>
-
-            <div className="cart-items">
-                {cartItems.map(item => (
-                    <div key={item.skuCode} className="cart-item">
-                        <div className="item-image">
-                            <img src={item.imgSrc} alt={item.skuCode} />
+        <>
+            <div id="page__content">
+                <div id="welcome-screen">
+                    <div className="checkout-container">
+                        <h2>Оформление заказа</h2>
+                        <div className="cart-items">
+                            {cartItems.map(item => (
+                                <div key={item.skuCode} className="cart-item">
+                                    <div className="item-image">
+                                        <img src={item.imgSrc} alt={item.skuCode} />
+                                    </div>
+                                    <div className="item-details">
+                                        <h3>{item.name}</h3>
+                                        <p>Цена: {item.price}</p>
+                                        <p>Количество: {item.quantity}</p>
+                                        <p>Сумма: {formatPrice(item.price) * item.quantity} ₽</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <div className="item-details">
-                            <h3>{item.name}</h3>
-                            <p>Цена: {item.price}</p>
-                            <p>Количество: {item.quantity}</p>
-                            <p>Сумма: {formatPrice(item.price) * item.quantity} ₽</p>
+
+                        <div className="order-summary">
+                            <h2>Итого: <b><i>{calculateTotal()} ₽</i></b></h2>
+                            <button
+                                onClick={handlePlaceOrder}
+                                disabled={loading}
+                                className="place-order-btn"
+                            >
+                                {loading ? 'Оформление...' : 'Оформить заказ'}
+                            </button>
+                            {error && <div className="error-message">{error}</div>}
                         </div>
                     </div>
-                ))}
+                </div>
             </div>
 
-            <div className="order-summary">
-                <h3>Итого: {calculateTotal()} ₽</h3>
-                <button
-                    onClick={handlePlaceOrder}
-                    disabled={loading}
-                    className="place-order-btn"
-                >
-                    {loading ? 'Оформление...' : 'Оформить заказ'}
-                </button>
-                {error && <div className="error-message">{error}</div>}
-            </div>
-        </div>
+        </>
     );
 };

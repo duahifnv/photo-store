@@ -1,7 +1,7 @@
 .checkout-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 100px;
 }
 
 .empty-cart-message {
@@ -12,13 +12,20 @@
 }
 
 .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin-top: 30px;
+    overflow-y: scroll;
+    height: 75%;
 }
 
 .cart-item {
     display: flex;
+    background-color: white;
+    border-radius: 5px;
     border-bottom: 1px solid #eee;
-    padding: 15px 0;
+    padding: 20px 30px;
 }
 
 .item-image {
@@ -47,13 +54,16 @@
 
 .order-summary {
     margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid #333;
     text-align: right;
 }
 
-.order-summary h3 {
-    font-size: 20px;
+h2 {
+    color: white;
+    font-size: 30px;
+}
+
+h2 span {
+    font-weight: 600;
 }
 
 .place-order-btn {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider.tsx';
 import '../../styles/page/auth-page.css';
+import '../../styles/page/main-page.css';
 
 export const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -93,68 +94,73 @@ export const AuthPage = () => {
     };
 
     return (
-        <div className="auth-container">
-            <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
-            {error && <div className="error-message">{error}</div>}
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Логин:</label>
-                    <input
-                        type="login"
-                        name="login"
-                        value={formData.login}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Пароль:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                {!isLogin && (
-                    <>
+        <div id="page__content">
+            <div id="welcome-screen">
+                <p id="welcome-text">Вход в систему</p>
+                <div className="auth-container">
+                    <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
+                    {error && <div className="error-message">{error}</div>}
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label>Имя:</label>
+                            <label>Логин:</label>
                             <input
-                                type="text"
-                                name="firstName"
-                                value={formData.firstName}
+                                type="login"
+                                name="login"
+                                value={formData.login}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
                         <div className="form-group">
-                            <label>Фамилия:</label>
+                            <label>Пароль:</label>
                             <input
-                                type="text"
-                                name="lastName"
-                                value={formData.lastName}
+                                type="password"
+                                name="password"
+                                value={formData.password}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
-                    </>
-                )}
-                <button
-                    type="submit"
-                    className="auth-button"
-                    disabled={isLoading}
-                >
-                    {isLoading ? 'Загрузка...' : (isLogin ? 'Войти' : 'Зарегистрироваться')}
-                </button>
-            </form>
-            <div className="auth-switch">
-                {isLogin ? (
-                    <span>Нет аккаунта? <button onClick={() => setIsLogin(false)}>Зарегистрироваться</button></span>
-                ) : (
-                    <span>Уже есть аккаунт? <button onClick={() => setIsLogin(true)}>Войти</button></span>
-                )}
+                        {!isLogin && (
+                            <>
+                                <div className="form-group">
+                                    <label>Имя:</label>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Фамилия:</label>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            </>
+                        )}
+                        <button
+                            type="submit"
+                            className="auth-button"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? 'Загрузка...' : (isLogin ? 'Войти' : 'Зарегистрироваться')}
+                        </button>
+                    </form>
+                    <div className="auth-switch">
+                        {isLogin ? (
+                            <span>Нет аккаунта? <button onClick={() => setIsLogin(false)}>Зарегистрироваться</button></span>
+                        ) : (
+                            <span>Уже есть аккаунт? <button onClick={() => setIsLogin(true)}>Войти</button></span>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );

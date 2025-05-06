@@ -39,12 +39,6 @@ export const App = () => {
                         <CheckoutPage />
                     </RequireAuth>
                 } />
-                {/*<Route path='/profile' element={*/}
-                {/*    <RequireAuth>*/}
-                {/*        <ProfilePage />*/}
-                {/*    </RequireAuth>*/}
-                {/*} />*/}
-
 
             </Routes>
             <Footer />
