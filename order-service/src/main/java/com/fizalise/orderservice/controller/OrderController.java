@@ -1,6 +1,7 @@
 package com.fizalise.orderservice.controller;
 
 import com.fizalise.orderservice.dto.OrderRequest;
+import com.fizalise.orderservice.dto.OrderResponse;
 import com.fizalise.orderservice.entity.Order;
 import com.fizalise.orderservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,26 +24,26 @@ public class OrderController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Order> getAllOrders() {
+    public List<OrderResponse> getAllOrders() {
         return orderService.findAllOrders();
     }
     @Operation(summary = "Получить мои заказы")
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user")
-    public List<Order> getAllOrders(Principal principal) {
+    public List<OrderResponse> getAllOrders(Principal principal) {
         return orderService.findAllOrders(principal.getName());
     }
     @Operation(summary = "Получить заказ по его коду")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Order getOrderById(@PathVariable UUID id) {
+    public OrderResponse getOrderById(@PathVariable UUID id) {
         return orderService.findOrderById(id);
     }
     @Operation(summary = "Оформить новый заказ")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Order createOrder(@Valid @RequestBody OrderRequest orderRequest, Principal principal) {
+    public OrderResponse createOrder(@Valid @RequestBody OrderRequest orderRequest, Principal principal) {
         return orderService.createOrder(orderRequest, principal.getName());
     }
     @Operation(summary = "Удалить заказ по его коду")
