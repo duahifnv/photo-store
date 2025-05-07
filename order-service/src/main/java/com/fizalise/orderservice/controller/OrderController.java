@@ -2,7 +2,6 @@ package com.fizalise.orderservice.controller;
 
 import com.fizalise.orderservice.dto.OrderRequest;
 import com.fizalise.orderservice.dto.OrderResponse;
-import com.fizalise.orderservice.entity.Order;
 import com.fizalise.orderservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -45,12 +44,5 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public OrderResponse createOrder(@Valid @RequestBody OrderRequest orderRequest, Principal principal) {
         return orderService.createOrder(orderRequest, principal.getName());
-    }
-    @Operation(summary = "Удалить заказ по его коду")
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteOrderById(@PathVariable UUID id) {
-        orderService.deleteOrderById(id);
     }
 }
