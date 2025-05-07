@@ -23,9 +23,6 @@ export const FavoritesPage = () => {
         return () => window.removeEventListener('favorites-updated', handleStorageChange);
     }, []);
 
-    if (loading) return <div>Загрузка...</div>;
-    if (favorites.length === 0) return <div>Нет товаров в избранном</div>;
-
     return (
         <>
             <div id="welcome-screen">
@@ -33,6 +30,8 @@ export const FavoritesPage = () => {
             </div>
             <div id="main-content">
                 <div id="catalog-wrapper">
+                    {loading && <div><h3>Загрузка...</h3> </div>}
+                    {favorites.length === 0 && <div><h3>Нет товаров в избранном</h3> </div>}
                     {favorites.map(product => (
                         <Item
                             key={product.skuCode}

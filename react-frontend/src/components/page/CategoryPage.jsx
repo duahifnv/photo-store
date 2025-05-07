@@ -49,6 +49,7 @@ export const CategoryPage = (props) => {
             </div>
             <div id="main-content">
                 <div id="catalog-wrapper">
+                    {loading && <div><h3>Загрузка...</h3> </div>}
                     {products.map(product => (
                         <Item
                             key={product.skuCode}
