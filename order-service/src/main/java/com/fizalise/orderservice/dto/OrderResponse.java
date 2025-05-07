@@ -1,8 +1,6 @@
 package com.fizalise.orderservice.dto;
 
-import com.fizalise.orderservice.entity.Order;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
